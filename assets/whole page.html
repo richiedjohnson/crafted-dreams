@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Crafted Dreams - Surrealist Discovery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&amp;family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e0b629",
+                        "background-light": "#f8f7f6",
+                        "background-dark": "#0A0A0B",
+                        "surface-dark": "#141415",
+                        "text-main": "#F4F4F5",
+                        "text-muted": "#8E8E93",
+                        "accent": "#991B1B"
+                    },
+                    fontFamily: {
+                        "display": ["'Playfair Display'", "serif"],
+                        "sans": ["'Inter'", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0px"}
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            html {
+                scroll-behavior: smooth;
+            }
+        }
+        .display-serif {
+            font-family: 'Playfair Display', serif;
+            font-stretch: condensed;
+        }
+        .sticky-filters {
+            position: sticky;
+            top: 80px;
+            z-index: 40;
+            backdrop-blur: md;
+            background-color: rgba(10, 10, 11, 0.8);
+        }.chiaroscuro-img {
+            filter: contrast(1.2) brightness(0.8) saturate(0.8);
+            transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+        }
+        .surreal-glow {
+            filter: drop-shadow(0 0 15px rgba(224, 182, 41, 0.3)) brightness(1.1);
+        }.liquid-surface {
+            position: relative;
+        }
+        .liquid-surface::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(10, 10, 11, 0.8) 95%);
+            pointer-events: none;
+        }.smoke-overlay {
+            position: relative;
+        }
+        .smoke-overlay::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, transparent 20%, rgba(0,0,0,0.4) 100%);
+            mix-blend-mode: overlay;
+            z-index: 10;
+        }
+        .parallax-section {
+            clip-path: inset(0 0 0 0);
+        }
+        .product-reveal-card {
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .nav-scrolled {
+            background-color: rgba(10, 10, 11, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .filter-checkbox {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border: 1px solid #3F3F46;
+            background-color: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        .filter-checkbox:checked {
+            background-color: #e0b629;
+            border-color: #e0b629;
+        }
+        .filter-checkbox:checked::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background-color: #0A0A0B;
+        }.botanical-entanglement::after {
+            content: '';
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            right: -10%;
+            bottom: -10%;
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M40,100 C40,40 160,40 160,100 C160,160 40,160 40,100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></svg>');
+            background-size: 200px;
+            opacity: 0.4;
+            pointer-events: none;
+            filter: blur(2px);
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-text-main font-sans antialiased selection:bg-primary selection:text-background-dark">
+<nav class="fixed top-0 w-full z-50 transition-all duration-500 bg-transparent px-6 md:px-12 py-6 flex items-center justify-between" id="navbar">
+<div class="hidden md:flex items-center gap-10 flex-1">
+<a class="text-[10px] tracking-[0.3em] uppercase hover:text-primary transition-colors font-medium" href="#">Shop</a>
+<a class="text-[10px] tracking-[0.3em] uppercase hover:text-primary transition-colors font-medium" href="#">Collections</a>
+<a class="text-[10px] tracking-[0.3em] uppercase hover:text-primary transition-colors font-medium" href="#">About</a>
+</div>
+<div class="flex-shrink-0">
+<a class="text-xl md:text-2xl display-serif tracking-tight uppercase" href="#">
+            Crafted Dreams
+        </a>
+</div>
+<div class="flex-1 flex justify-end gap-6">
+<button class="text-text-main hover:text-primary transition-colors focus:outline-none">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</button>
+<button class="text-text-main hover:text-primary transition-colors focus:outline-none">
+<span class="material-symbols-outlined text-[20px]">shopping_bag</span>
+</button>
+</div>
+</nav>
+<section class="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden liquid-surface">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-background-dark z-10"></div>
+<img alt="Dramatic dark gold photography" class="w-full h-full object-cover chiaroscuro-img surreal-glow scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3OE__JKlDBPY83-cnkNKph__QZKGORNeZmca3QpAFmcTE6lHD4GPjBHojZzswoghDeRJPtupjbYUuOaW0s_3dbJV2dijHPZuvTrTR6twNeiYh44RGGQHu68lvU2q6p7EXewkSh5_rvj6Gcwrmf7_fvvIoJG9HrKP-f_sWt1jKoWvaWdNBNNyK5jc4ssqGOYbLfEzHBf3lnjm5pxn7u-JotT7N_p8RJ7VB_Su9epAj--6Qf14UpqUMxsyDLhokP4aJIj2BjGWi8J0"/>
+</div>
+<div class="relative z-20 flex flex-col items-center text-center px-4 max-w-4xl mx-auto">
+<span class="text-[10px] tracking-[0.5em] uppercase text-primary mb-8 block opacity-80">The Nocturne Collection</span>
+<h1 class="text-6xl md:text-8xl lg:text-[100px] display-serif leading-[0.9] uppercase mb-12 mix-blend-difference">
+            Eclipse <br/>In Gold
+        </h1>
+<a class="group relative inline-flex items-center gap-4 px-10 py-4 border border-primary/30 hover:border-primary transition-all duration-500 overflow-hidden" href="#scroll-narrative">
+<span class="relative z-10 text-[10px] tracking-[0.4em] uppercase font-bold text-primary">Explore Collection</span>
+</a>
+</div>
+<div class="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center opacity-40">
+<span class="material-symbols-outlined text-xl animate-bounce">expand_more</span>
+</div>
+</section>
+<div id="scroll-narrative">
+<section class="relative min-h-screen w-full flex flex-col md:flex-row items-stretch overflow-hidden bg-background-dark">
+<div class="w-full md:w-1/2 h-[614px] md:h-screen relative overflow-hidden group smoke-overlay">
+<img alt="Luminary Ring Detail" class="w-full h-full object-cover chiaroscuro-img surreal-glow group-hover:scale-110 transition-transform duration-[3s]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSR73Xi0DDnx1LdJCp_28-YEId8OtPXFPsL58528xjy7R9xNZsdmHj6DN8fwo_odQFcyUupT54bcFSkkWLgzSfNAxI20A17_p6VhTZH4H59N6l0x9rnbkY2vNk8C8nMwtSNZOeUWVn49hyBWMYQSwsJmJbImDLuzdSb1TMZB9mh1tTxFjr0xIRIex0aOurihrptXfJvF8beis7YOzTLaRIJh8agJ8_p0NLAPgLnb4JOdc5HeeeWRAMJchvnq5nmRuAiuhBhryySB0"/>
+<div class="absolute inset-0 bg-black/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+</div>
+<div class="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-24 py-20 bg-background-dark z-20">
+<span class="text-[9px] tracking-[0.4em] uppercase text-text-muted mb-4 block">Curated Artifact 01</span>
+<h2 class="text-4xl md:text-6xl display-serif uppercase mb-6 leading-none">Luminary Ring</h2>
+<p class="text-text-muted text-sm leading-relaxed mb-8 max-w-md">Forged in 18k solid gold, the Luminary represents the first light of dawn against a velvet sky. A masterwork of texture and shadow.</p>
+<div class="flex items-center gap-12">
+<span class="text-2xl font-light tracking-widest text-primary">$850</span>
+<a class="text-[10px] tracking-[0.3em] uppercase border-b border-primary pb-1 hover:text-primary transition-colors" href="#">Details</a>
+</div>
+</div>
+</section>
+<section class="relative min-h-screen w-full flex flex-col md:flex-row-reverse items-stretch overflow-hidden bg-background-dark border-t border-white/5">
+<div class="w-full md:w-1/2 h-[614px] md:h-screen relative overflow-hidden group botanical-entanglement">
+<img alt="Nocturne Chain Detail" class="w-full h-full object-cover chiaroscuro-img surreal-glow group-hover:scale-110 transition-transform duration-[3s]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoEeps-lndO8ujxW2wFzN_50fm9W4blPUhpNXvYHtUphdeSAnfCRntrTZLFz6WTom7hNPi0FJ-SzfulJL6OyrsEznfFJTT5c4tEjGmdobL84sr8V7lJftMqmRl-VdJ_FLy40s-rvbAmzuzWEqi0X_Z_bgPLOVWqXU9aEs2px6DODjObXqE3C-kTjfKYwkWxfdt6AymcUqwK7skz1ZLJHvFSmy8V7XGoot2n6rylNKxrHTzWjJ-vknVpf4fxQx1hp6qU-OEULDMbfM"/>
+<div class="absolute inset-0 bg-gradient-to-l from-black/60 to-transparent"></div>
+</div>
+<div class="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-24 py-20 bg-background-dark z-20">
+<span class="text-[9px] tracking-[0.4em] uppercase text-text-muted mb-4 block">Curated Artifact 02</span>
+<h2 class="text-4xl md:text-6xl display-serif uppercase mb-6 leading-none">Nocturne Chain</h2>
+<p class="text-text-muted text-sm leading-relaxed mb-8 max-w-md">The weight of elegance. A fluid geometry of gold links designed to catch the flickering light of midnight gatherings.</p>
+<div class="flex items-center gap-12">
+<span class="text-2xl font-light tracking-widest text-primary">$1,200</span>
+<a class="text-[10px] tracking-[0.3em] uppercase border-b border-primary pb-1 hover:text-primary transition-colors" href="#">Details</a>
+</div>
+</div>
+</section>
+</div>
+<div class="sticky-filters border-b border-white/10 py-4 px-6 md:px-12 flex justify-between items-center">
+<div class="flex items-center gap-8">
+<div class="group relative">
+<button class="text-[10px] tracking-[0.3em] uppercase flex items-center gap-2 text-text-muted hover:text-text-main transition-colors">
+<span class="material-symbols-outlined text-[16px]">tune</span> Filter
+            </button>
+<div class="absolute top-full left-0 mt-4 w-64 bg-surface-dark border border-white/10 p-6 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl">
+<div class="space-y-6">
+<div>
+<span class="text-[9px] tracking-widest uppercase text-primary block mb-4">Material</span>
+<div class="space-y-2">
+<label class="flex items-center gap-3 cursor-pointer group/item">
+<input checked="" class="filter-checkbox" type="checkbox"/>
+<span class="text-[10px] uppercase tracking-wider text-text-muted group-hover/item:text-text-main">18k Solid Gold</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group/item">
+<input class="filter-checkbox" type="checkbox"/>
+<span class="text-[10px] uppercase tracking-wider text-text-muted group-hover/item:text-text-main">14k Solid Gold</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+<span class="text-[9px] tracking-[0.2em] uppercase text-text-muted/60">6 artifacts</span>
+</div>
+<div class="flex items-center gap-4">
+<select class="bg-transparent border-none text-[10px] text-text-muted hover:text-text-main transition-colors focus:ring-0 cursor-pointer uppercase tracking-[0.3em] p-0">
+<option class="bg-surface-dark">Featured</option>
+<option class="bg-surface-dark">High to Low</option>
+<option class="bg-surface-dark">Low to High</option>
+</select>
+</div>
+</div>
+<section class="max-w-7xl mx-auto px-6 md:px-12 py-24 space-y-48">
+<div class="flex flex-col md:flex-row gap-12 items-center">
+<div class="w-full md:w-2/3 aspect-[4/5] overflow-hidden bg-surface-dark group smoke-overlay">
+<img alt="The Nocturne Ring" class="w-full h-full object-cover chiaroscuro-img surreal-glow group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrSNXrh9WREPNcLMnRa1KmHoWrezyYMVxZQKUOhHf2e89iu2VqbAqkz3nqfd6Is09Jhn75c0gMrOUvxcI_opvrOlk3xPmsITaKOUEhU-WlKbUWcuubgG28_Az4LuHZIXwHDsbjm9aMXenI2wyZzpTufjrXQ5K-DmD8Md4A9ewvzvYVzbCCJc_u8cbU6mW3rPd625oL5fUjZTi7_GB9iefXIK7SXT1r-JWF0v2DKwjEJr5ECZWQdyJR6I6rdJxm9fzDvnpP2642URg"/>
+</div>
+<div class="w-full md:w-1/3 space-y-6">
+<span class="text-[10px] tracking-[0.2em] text-text-muted uppercase">18K Solid Gold</span>
+<h3 class="text-3xl display-serif uppercase tracking-tight">The Nocturne Ring</h3>
+<p class="text-text-muted text-sm leading-relaxed">A signature piece that defines the collection. Minimalist in form, complex in character.</p>
+<div class="flex items-center justify-between pt-4 border-t border-white/10">
+<span class="text-xl font-light text-primary">$850</span>
+<button class="text-[10px] tracking-[0.3em] uppercase text-text-main hover:text-primary transition-colors">Add to Bag</button>
+</div>
+</div>
+</div>
+<div class="w-full h-[614px] md:h-[819px] relative overflow-hidden botanical-entanglement liquid-surface">
+<img alt="Atmospheric visual" class="w-full h-full object-cover grayscale brightness-50 chiaroscuro-img blur-[1px]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB62KWOWNazdozlDhh1HX8hW_d1iX6iDdXcsl-kf3msVxi7uIjF7HDoNs_Go5F-05jE8MDvakMyxmGRAufB380_PqdFvptPjDbXWob7m7g1RZcnZbkzsFIK7gcZAZagNyIYTZbaqPfGefBEiCwoa1m4qBR4Jd5wYT_aWGKLuFVFq35UCUjuPW5NtKFNvH98w9QPOOUkA1CueeI_WfFjXmVco3bdDngWLoBGeCWU-rQYmwg2cGHqCRSSFR22venCw_QxdsVNMDxov9Y"/>
+<div class="absolute inset-0 flex items-center justify-center p-12 text-center z-20">
+<h4 class="text-2xl md:text-4xl display-serif italic max-w-2xl text-primary/80 drop-shadow-[0_0_20px_rgba(0,0,0,0.8)]">"Darkness is not the absence of light, but the stage upon which gold truly shines."</h4>
+</div>
+</div>
+<div class="flex flex-col md:flex-row-reverse gap-12 items-center">
+<div class="w-full md:w-2/3 aspect-[4/5] overflow-hidden bg-surface-dark group liquid-surface">
+<img alt="Obsidian Pendant" class="w-full h-full object-cover chiaroscuro-img surreal-glow group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBznIcBI6JBC5hxvd7Q8tOZ-BglTXuM2_2S5ATnyX_0cYlacN-poyz9VBgLAkOFheC_6PpKR0bVNNHhdSUhApu2-F3sC9vCsghqx6lL5Avdb5KPUrHJFyzfwOfT_5secQDda-hUZirw5fyu17flxlRaek84h7oY6t_ot-Foy8tJSXxCq63-smnQb4UkyFH9QE5LkAIvKkj7dnE-1qeVrNo176R2C4aMvDAbi_iTiQx8KENyaK640ebU7VRdvixoaly3q70Y4-PalrY"/>
+<div class="absolute top-6 right-6 bg-background-dark border border-accent px-4 py-2 z-20">
+<span class="text-[9px] uppercase tracking-[0.3em] text-accent font-bold">Out of Stock</span>
+</div>
+</div>
+<div class="w-full md:w-1/3 space-y-6">
+<span class="text-[10px] tracking-[0.2em] text-text-muted uppercase">14K Solid Gold</span>
+<h3 class="text-3xl display-serif uppercase tracking-tight">Obsidian Pendant</h3>
+<p class="text-text-muted text-sm leading-relaxed">Inspired by the volcanic glass of the ancients, framed in a brutalist gold setting.</p>
+<div class="flex items-center justify-between pt-4 border-t border-white/10 opacity-50">
+<span class="text-xl font-light text-primary">$1,200</span>
+<span class="text-[10px] tracking-[0.3em] uppercase">Join Waitlist</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-12 items-center">
+<div class="w-full md:w-2/3 aspect-[4/5] overflow-hidden bg-surface-dark group smoke-overlay">
+<img alt="Midnight Cuff" class="w-full h-full object-cover chiaroscuro-img surreal-glow group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXzNjyDgO4ZjJBR1TzHGggfsLGxw1CEFVaLwkHEoVf8h_0OcfFAmp_2513Bl_GNC6OVAU9oGo_aevJ-erpUFMy0WPIFGOBPLJjyDpu3QH23LnnaLMfd9bR2Nt5sMAYtGKMq-FJrnDjkkRQGu17MoBr_omWwECHTD25r4eR3gEDlbmQmecc6GCJMFElx8ZVXJadxbwiAzpG0wdQvtd9zc4i9V2UysBup1Li2cCx89xDULYp2g7PCqSLKgdKplXmRfq_5CsulfdBosM"/>
+</div>
+<div class="w-full md:w-1/3 space-y-6">
+<span class="text-[10px] tracking-[0.2em] text-text-muted uppercase">18K Solid Gold</span>
+<h3 class="text-3xl display-serif uppercase tracking-tight">Midnight Cuff</h3>
+<p class="text-text-muted text-sm leading-relaxed">A bold statement of artisanal craftsmanship, finished with a subtle matte texture.</p>
+<div class="flex items-center justify-between pt-4 border-t border-white/10">
+<span class="text-xl font-light text-primary">$950</span>
+<button class="text-[10px] tracking-[0.3em] uppercase text-text-main hover:text-primary transition-colors">Add to Bag</button>
+</div>
+</div>
+</div>
+<div class="w-full aspect-video relative overflow-hidden liquid-surface botanical-entanglement">
+<img alt="Abstract gold texture" class="w-full h-full object-cover chiaroscuro-img surreal-glow brightness-75 saturate-50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTSbvHmmT4geOudLyvz1F1iy4mhnopw_R8BiXHgdyShcGmbsamAXY0xk12d5Dcz2ro2VJOgr3nspI2WvxCH1IY99nAtwCnYSr9GpJ6cknLsJcshvPbuyBbm0xdHrgLoRreT1mDg0GoT6Ca1jVdsalwJd-p18e0Xmvm8M36J6OHS5fs8DCYitSC-zxd9S5_-A0dzmRSoVVbnYDy-KMOhorZTfsy1H_hpdT_wctbesIZ60MxtMTjm0ikm4gEAydRTAhIdhEQBS3VwtM"/>
+<div class="absolute inset-0 bg-black/50 mix-blend-multiply"></div>
+</div>
+<div class="flex flex-col md:flex-row-reverse gap-12 items-center">
+<div class="w-full md:w-2/3 aspect-[4/5] overflow-hidden bg-surface-dark group smoke-overlay">
+<img alt="Starlight Choker" class="product-image-filter w-full h-full object-cover chiaroscuro-img surreal-glow group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfaijrqB2pRVIqGAz5N_fRPfnkqVJF2JNFFrpEuGC_N90AtfuIaNnthijYR5FWOtW_xPLdEg4IUiY8HHQJrC3DLuIXSEcC0r2VGgIGd0UrtggkiRHT2Ekz4uaodp2rFyyp1rP0YsgLV_a5rMZuUFsrQjzyBAvpGPMFHgegU6jOHD8VH2LakQVdt1KXaWRYhQYtKdrl9yXgjEMk-9lfnoBh6QIVRXcRRlLfN7lU1ccPNjQv3r3Ca-eqLuviEp4AyWb-mSHILQW1I88"/>
+</div>
+<div class="w-full md:w-1/3 space-y-6">
+<span class="text-[10px] tracking-[0.2em] text-text-muted uppercase">14K Solid Gold</span>
+<h3 class="text-3xl display-serif uppercase tracking-tight">Starlight Choker</h3>
+<p class="text-text-muted text-sm leading-relaxed">Delicate yet definitive. A constellation of light captured around the neckline.</p>
+<div class="flex items-center justify-between pt-4 border-t border-white/10">
+<span class="text-xl font-light text-primary">$800</span>
+<button class="text-[10px] tracking-[0.3em] uppercase text-text-main hover:text-primary transition-colors">Add to Bag</button>
+</div>
+</div>
+</div>
+</section>
+<footer class="w-full border-t border-white/5 py-24 px-6 md:px-12 bg-background-dark">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-16">
+<div class="space-y-8">
+<a class="text-4xl display-serif uppercase tracking-tight block" href="#">Crafted <br/>Dreams</a>
+<p class="text-text-muted text-xs tracking-widest uppercase leading-loose max-w-xs">Elevating the darkness through the timeless allure of gold.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-16">
+<div class="space-y-4">
+<h5 class="text-[10px] tracking-[0.3em] uppercase text-primary">Explore</h5>
+<ul class="space-y-2 text-[10px] tracking-widest uppercase text-text-muted">
+<li><a class="hover:text-text-main transition-colors" href="#">Collections</a></li>
+<li><a class="hover:text-text-main transition-colors" href="#">Bespoke</a></li>
+<li><a class="hover:text-text-main transition-colors" href="#">Journal</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h5 class="text-[10px] tracking-[0.3em] uppercase text-primary">Social</h5>
+<ul class="space-y-2 text-[10px] tracking-widest uppercase text-text-muted">
+<li><a class="hover:text-text-main transition-colors" href="#">Instagram</a></li>
+<li><a class="hover:text-text-main transition-colors" href="#">Pinterest</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h5 class="text-[10px] tracking-[0.3em] uppercase text-primary">Legal</h5>
+<ul class="space-y-2 text-[10px] tracking-widest uppercase text-text-muted">
+<li><a class="hover:text-text-main transition-colors" href="#">Privacy</a></li>
+<li><a class="hover:text-text-main transition-colors" href="#">Terms</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/5 flex justify-between items-center text-[9px] tracking-[0.4em] uppercase text-text-muted/40">
+<span>© 2024 Crafted Dreams Artifacts</span>
+<span>Handcrafted with intent</span>
+</div>
+</footer>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                navbar.classList.add('nav-scrolled');
+                navbar.classList.remove('py-6');
+                navbar.classList.add('py-4');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+                navbar.classList.add('py-6');
+                navbar.classList.remove('py-4');
+            }
+        });
+    });
+</script>
+
+</body></html>
